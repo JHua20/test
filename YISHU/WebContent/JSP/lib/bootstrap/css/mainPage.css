@@ -1,0 +1,65 @@
+.nav_logo{
+    margin-left: 30px;
+}
+.hr_sty{
+    color: #f15b28;
+}
+
+.breadcrumb_backg{
+    background: none;
+}
+.row_bottom{
+    margin-bottom: 10px;
+}
+.row_side{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.pro_name{
+    font-weight: bold;
+    font-size: 1.3rem;
+    line-height: 2em;
+}
+.pro_img{
+    width: 100%;
+    max-width: 17rem;
+    height: 100%;
+    max-width: 20rem;
+}
+.pro_press{
+    font-size:15px;
+    color: black;
+    
+}
+.pro_price{
+    color: orangered;
+    font-size: 20px;
+    font-weight: bold;
+}
+.pro_collected{
+    color: lightgray;
+    font-size: 12px;
+}
+.row .card a{
+    text-decoration: none;
+    color: black;
+}
+.row .card a:hover{
+    color: black;
+    text-decoration: underline;
+}
+.in_one_row{
+    width:17rem;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.foot_logo{
+
+    max-height: 6rem;
+    max-width: 6rem;
+}
+.foot_word{
+    color：gray；
+    font-size: 10px;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.gcu.yishu.order.pojos">
+    
+    <class name="Order" table="T_ORDER">
+    	<!-- 订单编号 -->
+        <id name="Order_Id" column="ORDER_ID" type="integer">
+            <generator class="native" />
+        </id>
+    	<!-- 订单生成时间 -->
+    	<property name="CreateTime" column="CREATE_TIME" type="date" not-null="true"/>
+    	<!-- 订单支付状态 -->
+    	<property name="IsitOnline" column="IS_IT_ONLINE" type="integer" not-null="true"/>
+    	<!-- 订单交付状态 -->
+    	<property name="IsitPay" column="IS_IT_PAY" type="integer" not-null="true"/>
+    	<!-- 是否通过线上交易 -->
+    	<property name="Isitarrive" column="IS_IT_ARRIVE" type="integer" not-null="false"/>
+    	<!-- 商品购买数量-->
+    	<property name="Pro_sum" column="PRO_SUM" type="integer" not-null="false"/>
+    	<!-- 单项关联N-1 -->
+    	<many-to-one name="user" column="USER_ID" class="com.gcu.yishu.user.pojos.User"/>
+  		<many-to-one name="product" column="ORDER_HAVE_PRO" class="com.gcu.yishu.product.pojos.Product"/>
+    </class>
+</hibernate-mapping>
