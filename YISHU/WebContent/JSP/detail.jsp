@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/pro_main_info.css">
-<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/pro_main_info.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product_detail</title>
 </head>
@@ -21,7 +25,7 @@
     <div class="row center_content">
         <div class="col-md-6 col-xs-6 border border-info text-center">
             <div class="rounted main_img_con">
-               <img src="WebContent/Picture/默认图片.jpg" class="main_img img-thumbnail" alt="图片">
+               <img src="${product.pic_path}" class="main_img img-thumbnail" alt="图片">
             </div>
             <div class="row small_img_con">
                 <ul class="img_ul">

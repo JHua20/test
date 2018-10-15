@@ -14,6 +14,7 @@
     <title>主页</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/mainPage.css">
+    <base href="<%=basePath%>">
 </head>
 <body style="height:1500px;">
 <div class="container-flush">
@@ -116,7 +117,7 @@
     <jsp:include page="/JSP/top.jsp"></jsp:include>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="col-md-4 text-right">
-            <img src="lib/bootstrap/img/logo.jpg" class="nav_logo" width="190px" height="80px" alt="易书网">
+            <img src="<%=basePath%>JSP/lib/bootstrap/img/logo.jpg" class="nav_logo" width="190px" height="80px" alt="易书网">
         </div>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav col-md-8">
@@ -182,7 +183,7 @@
           <div class="card row_bottom" style="width:17rem;height:26rem;margin-right:0.5rem;">
                 <div style="width:17rem;height:18rem;">
                    <a href="${pageContext.request.contextPath}/Product_detail.action?Pro_ID=${product.pro_id}">
-                     <img class="card-img-top" style="width:15rem;height:18rem;" src="lib/bootstrap/img/高等数学.jpg" alt="高等数学">
+                     <img class="card-img-top" style="width:15rem;height:15rem;" src="${product.pic_path}" alt="${product.pro_name}"/>
                    </a>
                 </div>
                 <div class="card-block" style="width:17rem;height:8rem;padding-top:1rem;">
@@ -210,7 +211,7 @@
         </div>
     </div>
 </div>
-<script src="lib/jquery-3.3.1.js"></script>
-<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="<%=basePath%>JSP/lib/jquery-3.3.1.js"></script>
+<script src="<%=basePath%>JSP/lib/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

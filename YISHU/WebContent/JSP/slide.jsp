@@ -15,13 +15,14 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item  text-center col-md-12 active ">
-              <img class="d-block w-100" src="${ctx}/lib/img/slide1.jpg" height="300px" alt="First slide">
+              <img class="d-block w-100" src="<%=basePath%>Picture/face1.jpg" height="350px" alt="First slide">
+            
             </div>
             <div class="carousel-item text-center col-md-12">
-              <img class="d-block w-100" src="${ctx}/lib/img/slide2.jpg" height="300px" alt="Second slide">
+              <img class="d-block w-100" src="<%=basePath%>Picture/face2.jpg" height="350px" alt="Second slide">
             </div>
             <div class="carousel-item text-center col-md-12">
-              <img class="d-block w-100" src="${ctx}/lib/img/slide1.jpg" height="300px" alt="Third slide">
+              <img class="d-block w-100" src="<%=basePath%>Picture/face3.jpg" height="350px" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -30,13 +30,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	//封装分页数据到pageinfo对象里
-    public PageInfo listpage(int currentPage) {
+    public PageInfo listpage(int currentPage,int pageSize) {
     	//获得总记录数,要查询 {数据库}
     	int allRowCount=productDao.findCount();
     	
     	System.out.println("allRowCount: "+allRowCount);
     	//每页显示 的记录数
-    	int pageSize = 5;
+    	//int pageSize = 5;
     	
     	//创建PageInfo对象(三个参数分别为----总记录数+++每页显示记录数+++++当前页数)
 		PageInfo pageinfo = new PageInfo(allRowCount,pageSize,currentPage);

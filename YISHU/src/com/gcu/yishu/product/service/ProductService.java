@@ -14,7 +14,7 @@ public interface ProductService{
 	//更新
 	public void update(Product product);
 	//封装分页对象到pageinfo里
-	public  PageInfo listpage(int currentPage); 
+	public PageInfo listpage(int currentPage, int pageSize);
 	
 //	//根据id删除
 //	public void delete(Serializable id);
@@ -22,5 +22,6 @@ public interface ProductService{
 //	public List<Product> findObjects();
 //	//根据id查询
 	public Product findObjectById(Serializable id);
+	
 		
 }

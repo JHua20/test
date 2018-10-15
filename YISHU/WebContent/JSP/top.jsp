@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/comm/taglibs.jsp"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!-- 对应session的user -->
 <c:set var="user" value="${user}"></c:set>
 <!-- 头部登录栏  -->

@@ -29,6 +29,16 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	private ProductService productService;
 	private SessionUtil sessionUtil;
 	private OrderAction orderAction;
+	//10.12增
+	private int pageSize = 8;//用于表示分页显示商品个数
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
 	private int Pro_ID;//属性封装，获取物品id，用于detail页面
 
 	public int getPro_ID() {
@@ -65,10 +75,14 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 				String filePath="E:/JavaEE/product_pic_save/";
 				String fileName = UUIDUtils.getUUID()+".jpg";
 				String newpath = filePath+fileName;
+//				String secondpath = "/YISHU/productImg/"+fileName;
 				File diskFile =new File(newpath);
+//				File diskFile =new File(secondpath);
 				FileUtils.copyFile(product.getPro_pic(),diskFile);
 				System.out.println(filePath+fileName);
-				product.setPic_path(newpath);
+//				System.out.println("/YISHU/productImg/"+fileName);
+//				product.setPic_path(newpath);
+				product.setPic_path("/YISHU/productImg/"+fileName);
 			}
 		}else{
 			System.out.println("图片格式不符合，长宽限制为600*800");
@@ -96,9 +110,10 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 
 	public String listPage(){
 
+		pageSize = 5;
 		System.out.println("action----CurrentPage: "+CurrentPage);
 
-		PageInfo pageInfo =productService.listpage(CurrentPage);
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize);
 
 		System.out.println("action-----getAllRowCount(): "+pageInfo.getAllRowCount());	
 
@@ -110,7 +125,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 
 		System.out.println("action----CurrentPage: "+CurrentPage);
 
-		PageInfo pageInfo =productService.listpage(CurrentPage);
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize);
 
 		System.out.println("action-----getAllRowCount(): "+pageInfo.getAllRowCount());	
 
@@ -188,7 +203,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	public String homePage(){
 		System.out.println("Action--homePage");
 
-		PageInfo pageInfo =productService.listpage(CurrentPage);
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize);
 
 		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);
 
@@ -228,6 +243,8 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		// TODO Auto-generated method stub
 		return product;
 	}
+
+	
 
 	
 }
