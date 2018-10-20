@@ -2,7 +2,7 @@
 <%@ include file="/comm/taglibs.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!-- 对应session的user -->
-<c:set var="user" value="${user}"></c:set>
+<c:set var="user" value="${UserList}"></c:set>
 <!-- 头部登录栏  -->
 <ul class="nav nav-pills bg-danger justify-content-end" role="tablist">
    <c:if test="${empty user}">
@@ -16,7 +16,7 @@
    <!-- 头部 差获取名字参数 整合得到用户名  -->
    <c:if test="${not empty user}">
    		<li class="nav-item" >
-	       	 亲爱的<span style="color:green;">${user.name}</span>，欢迎回来~
+	       	 亲爱的 <span style="color:green;"> <a href="#">${user.userName}</a></span>，欢迎回来~
 	    </li>
    </c:if>
 </ul>

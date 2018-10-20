@@ -1,14 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
+<%  
+String path = request.getContextPath();  
+
+String webContentPath =request.getSession().getServletContext().getRealPath("/");
+System.out.println(webContentPath);
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.css">
+ <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/pro_details.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>listPage</title>
 </head>
-<body>  
+<body>
+<div class="container">
+        <nav aria_label="breadcrumb breadcrumbback">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">我的商品</li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_homePage">主页 </a></li>
+                <li class="breadcrumb-item"><a href="<s:url action="Product_addUI"/>">上架商品 </a></li>         
+                <li class="breadcrumb-item"><a href="<s:url action="#"/>">购物车 </a></li>
+                <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/Product_allProduct.action?CurrentPage=1"> 所有商品 </a></li>
+            </ol>
+        </nav>  
     <table>
        <tr>
            <td></td>
@@ -49,7 +71,7 @@
                [<a href="${pageContext.request.contextPath}/Product_listPage.action?CurrentPage=${CurrentPage+1}">下一页</a>]
            </c:if>
     </div>
-    
+</div>   
 </body>
 </html>
 

@@ -207,6 +207,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 
 		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);
 
+		
 		return "main";
 	}
 

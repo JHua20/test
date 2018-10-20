@@ -10,12 +10,22 @@
 <head>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/yishu_search_message.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/pro_main_info.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>全部商品</title>
 
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/Product_homePage"> 主页 </a>
+<div class="container">
+		<nav aria_label="breadcrumb breadcrumstyle">
+		        <ol class="breadcrumb">
+		           
+		            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_homePage">主页</a></li>
+		            <li class="breadcrumb-item"><a href="#">所有商品</a></li>
+		            <li class="breadcrumb-item active">商品详情</li>
+		        </ol>
+		</nav>
+</div>
 <div id="select_main">
      
      <div class="select_criteria">

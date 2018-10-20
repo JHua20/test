@@ -38,7 +38,7 @@ public class OrderActionImpl implements ModelDriven<Order>, OrderAction{
 		
 		Date date = null;
 		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = formatter.format(currentTime);
 		
 		try {
@@ -67,7 +67,7 @@ public class OrderActionImpl implements ModelDriven<Order>, OrderAction{
 
 	@Override
 	public String findOrderList() {
-		// TODO Auto-generated method stub
+		
 		User user=(User)sessionUtil.getSession().get("UserList");
 		System.out.println("findItemList Action Test");
 		List<Order> item=orderService.findOrderList(user);

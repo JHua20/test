@@ -17,8 +17,8 @@
   <div class="container">
     <nav aria_label="breadcrumb breadcrumstyle">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">主页</a></li>
-            <li class="breadcrumb-item"><a href="#">所有商品</a></li>
+            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_homePage">主页</a></li>
+            <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_allProduct.action?CurrentPage=1">所有商品</a></li>
             <li class="breadcrumb-item active">商品详情</li>
         </ol>
     </nav>
@@ -82,7 +82,7 @@
         </div>
     </div>
 </div>
-<script src="lib/jquery-3.3.1.js"></script>
-<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="<%=basePath%>JSP/lib/jquery-3.3.1.js"></script>
+<script src="<%=basePath%>JSP/lib/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

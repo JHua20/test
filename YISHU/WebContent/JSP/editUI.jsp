@@ -6,11 +6,36 @@
 
 <html>
 <head>
+<%  
+String path = request.getContextPath();  
+
+String webContentPath =request.getSession().getServletContext().getRealPath("/");
+System.out.println(webContentPath);
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%> 
+
+ <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.css">
+ <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/pro_details.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Product_edit</title>
 </head>
 <body>
-<div>-编辑-</div>
+<div class="container">
+        <nav aria_label="breadcrumb breadcrumbback">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">编辑</li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_homePage">主页</a></li>
+                <li class="breadcrumb-item"><a href="<s:url action="Product_addUI"/>"> 上架商品 </a></li>
+                
+                <li class="breadcrumb-item"><a href="<s:url action="Product_listPage"><s:param name="CurrentPage" value="1"></s:param></s:url>">我的商品</a></li>
+                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Product_listPage.action?CurrentPage=1">我的商品</a></li>
+                <li class="breadcrumb-item"><a href="<s:url action="#"/>">购物车</a></li>
+                <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/Product_allProduct.action?CurrentPage=1">所有商品</a></li>
+            </ol>
+        </nav>
+
 
     <form action="Product_edit?picPath=${product.pic_path}" method="post" enctype="multipart/form-data">
        
@@ -46,5 +71,6 @@
        <img src="${product.pic_path}" width="130"height="130"/>
        <input type="submit" value="确定"/>      
     </form>
+</div>
 </body>
 </html>

@@ -11,7 +11,7 @@
             <generator class="native" />
         </id>
     	<!-- 订单生成时间 -->
-    	<property name="CreateTime" column="CREATE_TIME" type="date" not-null="true"/>
+    	<property name="CreateTime" column="CREATE_TIME" type="date" not-null="true" length="20"/>
     	<!-- 订单支付状态 -->
     	<property name="IsitOnline" column="IS_IT_ONLINE" type="integer" not-null="true"/>
     	<!-- 订单交付状态 -->
