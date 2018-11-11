@@ -34,7 +34,11 @@
         <!-- 封面路径 -->
         <property name="pic_path" type="java.lang.String">
             <column name="PIC_PATH" not-null="true"></column>
-        </property>        
+        </property> 
+         <!-- 专业类 -->
+        <property name="major" type="java.lang.String">
+            <column name="Major"></column>
+        </property>         
         <!--多对一        外键用户id-->
          <many-to-one name="User" class="com.gcu.yishu.user.pojos.User" fetch="join"> 
              <column name="BELONG_WHO" /> 

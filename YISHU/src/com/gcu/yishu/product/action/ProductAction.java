@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import com.gcu.yishu.order.action.OrderAction;
 import com.gcu.yishu.pagination.PageInfo;
@@ -17,6 +18,7 @@ import com.gcu.yishu.util.session.SessionUtil;
 import com.gcu.yishu.uuid.UUIDUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -25,12 +27,30 @@ import com.opensymphony.xwork2.ModelDriven;
 public class ProductAction extends ActionSupport implements ModelDriven<Product> {
 
 	private static final long serialVersionUID = 1L;	
-	private Product product = new Product();	
+	private Product product = new Product();
+
 	private ProductService productService;
 	private SessionUtil sessionUtil;
 	private OrderAction orderAction;
+	
+	/*10.27newAdd*/
+
+	private String college;            //学院
+	
+	/*11.3*/
+//	public HttpServletRequest request; 
+    
+	
+	public String getCollege() {
+		return college;
+	}
+	public void setCollege(String college) {
+		this.college = college;
+	}
+	
 	//10.12增
 	private int pageSize = 8;//用于表示分页显示商品个数
+	
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -65,8 +85,8 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 
 	public String add() throws FileNotFoundException, IOException{
 
-		User user=(User)sessionUtil.getSession().get("UserList");
-		System.out.println("sessionUtil Test: "+user.getID());
+//		User user=(User)sessionUtil.getSession().get("UserList");
+//		System.out.println("sessionUtil Test: "+user.getID());
 
 		BufferedImage sourceImg =ImageIO.read(new FileInputStream(product.getPro_pic()));
 		System.out.println("Test 2");
@@ -86,7 +106,9 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 			}
 		}else{
 			System.out.println("图片格式不符合，长宽限制为600*800");
-			product.setPic_path("WebContent/Picture/默认图片.jpg");//鏄剧ず鑾緱鍥剧�?
+			System.out.println("将采用默认图片");
+//			String realPath = request.getSession().getServletContext().getRealPath("WebContent/Picture/default.jpg");
+			product.setPic_path("/YISHU/productImg/default.jpg");//
 		}
 		productService.save(product);
 		System.out.println("productService-save");
@@ -94,7 +116,6 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		System.out.println("Product add test： "+product.getPro_name());
 		return "toHome";
 	}
-
 
 	public String listUI(){
 		return "listUI";
@@ -130,8 +151,11 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		System.out.println("action-----getAllRowCount(): "+pageInfo.getAllRowCount());	
 
 		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);
+		
 		return "allProduct";
 	}
+
+
 
 	public String editUI(){	
 		System.out.println("Action---editUI");
@@ -175,7 +199,8 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 				product.setPic_path(newpath);
 			}else{
 				System.out.println("图片格式不符合，长宽限制为600*800");
-				product.setPic_path("WebContent/Picture/默认图片.jsp");
+				System.out.println("将采用默认图片");
+				product.setPic_path("/YISHU/productImg/default.jpg");
 			}				
 		}else{
 			product.setPic_path(picPath);//设回原路径
@@ -191,11 +216,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	}
 	//跳转到新增页面
 	public String addUI(){
-		//判断是否登录
-//		if(sessionUtil.getSession()==null){
-//			System.out.println("尚未登录，请登录");
-//			return "Login";
-//		}
+
 		return "addUI";
 	}
 
@@ -203,13 +224,17 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	public String homePage(){
 		System.out.println("Action--homePage");
 
-		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize);
-
-		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);
-
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize);//默认（1,8）
+/*10.21*/PageInfo pageInfo2 =productService.listpage(2,pageSize);//第二页
+/*10.21*/PageInfo pageInfo3 =productService.listpage(3,pageSize);//第三页
 		
+		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);
+/*10.21*/ServletActionContext.getRequest().setAttribute("PageInfo2", pageInfo2);
+/*10.21*/ServletActionContext.getRequest().setAttribute("PageInfo3", pageInfo3);
+
 		return "main";
 	}
+	
 
 	//跳转详情页
 	public String detail(){
@@ -225,10 +250,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	}
 	//转购物车
 	public String shopCar(){
-//		if(sessionUtil.getSession()==null){
-//			System.out.println("尚未登录，请登录");
-//			return "Login";
-//		}
+
 		System.out.println("购物车");
 		System.out.println("Product ID Test: "+ServletActionContext.getRequest().getSession().getAttribute("product"));
 		orderAction.addOrderList();
@@ -238,14 +260,69 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	public String login(){
 		return "login";
 	}
-
-	@Override
-	public Product getModel() {
-		// TODO Auto-generated method stub
-		return product;
+	
+	private String Maj;//专业
+	public String getMaj() {
+		return Maj;
 	}
+	public void setMaj(String maj) {
+		Maj = maj;
+	}
+	
+	//10.27--条件查询选学院专业
+	public String major(){
+		
+		//10.28
+//		System.out.println("college： "+getCollege());
+		System.out.println("Major： "+ Maj);
 
+		String condition ="major";//条件属性major
+		String value ="'"+Maj+"'";
+		
+		System.out.println("条件属性为： "+ condition+" 值为："+ value);
+		
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize,condition,value);
+
+		System.out.println("pageInfo: "+pageInfo.toString());
+		
+		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);		
+//		return "findResult";//"查询结果"
+		return "allProduct";		
+	}
+	//11.6
+	private String Condition;//模糊查询的内容
+	public String getCondition() {
+		return Condition;
+	}
+	public void setCondition(String condition) {
+		Condition = condition;
+	}
+	
+	//11.6
+    public String search(){
+		
+		System.out.println("模糊查询的内容： "+ Condition);
+	
+		PageInfo pageInfo =productService.listpage(CurrentPage,pageSize,Condition);
+
+		System.out.println("pageInfo: "+pageInfo.toString());
+		
+		ServletActionContext.getRequest().setAttribute("PageInfo", pageInfo);		
+//		return "findResult";//"查询结果"
+		return "allProduct";		
+	}
+	
+	
 	
 
+	@Override
+	public Product getModel() {		
+		return product;
+	}
+	
+	
+	
+	
+	
 	
 }

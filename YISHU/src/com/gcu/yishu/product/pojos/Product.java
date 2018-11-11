@@ -20,20 +20,22 @@ public class Product implements Serializable {
 	 */
 	private static final long serialVersionUID = 6096095933736141003L;
 
-	private Integer Pro_id;//娴溠冩惂缂傛牕褰�
-	private String Pro_name;//娴溠冩惂閸氬秴鐡�
-	private String Pro_press;//閸戣櫣澧楃粈锟�
-	private String Pro_price;//娴溠冩惂娴犻攱鐗�
-	private String Pro_author;//閸戣櫣澧楁担婊嗭拷锟�
+	private Integer Pro_id;//商品id---主键
+	private String Pro_name;//商品名字
+	private String Pro_press;//出版社
+	private String Pro_price;//价格
+	private String Pro_author;//作者
 //	private Date pro_PubishTime;//娴溠冩惂閸欐垵绔烽弮鍫曟？
 	private String Pro_pubishTime;
 	private Integer Collected_count;
 	private Product_Style product_Style;//鍥剧墖鏍峰紡绫�
 
-	private User user;//鍗栧
+	private User user;//卖家
 	
-	private File pro_pic;//鍥剧墖鏂囦欢鑾峰彇	
-	private String pic_path;//鑾峰彇灏侀潰璺緞
+	private File pro_pic;//图片文件	
+	private String pic_path;//图片路径
+	/*11.2新增属性*/
+	private String major;
 	
 	//閺嬪嫰锟界姵鏌熷▔锟�
 	public Product() {
@@ -128,6 +130,14 @@ public class Product implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
 	}
 
 	

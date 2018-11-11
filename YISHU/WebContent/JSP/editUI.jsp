@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.min.css">
  <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/bootstrap.css">
  <link rel="stylesheet" type="text/css" href="<%=basePath%>JSP/lib/bootstrap/css/pro_details.css">
-
+ <script src="<%=basePath%>JSP/lib/bootstrap/js/AddDate.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Product_edit</title>
 </head>
@@ -59,9 +59,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <td>作者：</td>
                <td><input type="text" value="${product.pro_author}" name="Pro_author"/></td>             
            </tr>
+            <tr>
+	            <td>专业：</td>  
+	            <td>
+	                <select name="major" class="form-control">
+					    <option value="0" selected="selected">请选择专业类型</option>
+						<option value="计算机">计算机</option>
+						<option value="外国语">外国语</option>
+						<option value="经济管理">经济管理</option>
+						<option value="机械">机械</option>
+						<option value="5其他">其他</option>
+					</select>
+	            </td>
+	      </tr>
            <tr>
                <td>产品发布时间：(如：2018-10)</td>
-               <td><input type="text" value="${product.pro_pubishTime}" name="Pro_pubishTime"/> </td>             
+               <td><input type="text" value="${product.pro_pubishTime}" name="Pro_pubishTime" onfocus="HS_setDate(this)"/> </td>             
            </tr>
            <tr><td>封面</td>
 <%--                <td><input type="file" value="${product.pro_pic}" name="pro_pic"/></td> --%>

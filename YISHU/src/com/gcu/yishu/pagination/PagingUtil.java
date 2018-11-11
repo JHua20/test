@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import com.gcu.yishu.pagination.PageInfo;
 
 /**
- * @Description 姝ゅ伐鍏峰寘搴旂敤浜庡鍒嗛〉杩涜鎿嶄綔 
+ * @Description 此工具包应用于对分页进行操作 
  * 
  * @author Ladi
  */
@@ -22,11 +22,11 @@ public class PagingUtil {
 	}
 
 	/**
-	 * @Description 鑾峰彇鏈鏌ヨ鐨勬墍鏈夌储寮�
+	 * @Description 获取本次查询的所有索引
 	 * 
-	 * @param hql 鑷畾涔塰ql璇彞
+	 * @param hql 自定义hql语句
 	 * 
-	 * @return 鎵�鏈夌鍚堢殑绱㈠紩鏁�
+	 * @return 所有符合的索引数
 	 */
 	@SuppressWarnings("rawtypes")
 	public int getAllRows(final String hql) {
@@ -55,10 +55,10 @@ public class PagingUtil {
 	}
 
 	/**
-	 * @Description 鏌ヨ姣忛〉鐨勫璞℃暟鎹�
+	 * @Description 查询每页的对象数据
 	 * 
-	 * @param PageSize 姣忛〉鏄剧ず鐨勬暟鎹�
-	 * @param obj 褰撻〉鍩烘湰鏁版嵁
+	 * @param PageSize 每页显示的数据
+	 * @param obj 当页基本数据
 	 * 
 	 * @return PageResultSet<T>
 	 */
@@ -71,8 +71,8 @@ public class PagingUtil {
 		PageResultSet<T> pageResultSet = new PageResultSet<T>();		
 		try {
 			session=hibernateUtils.getSession();			
-			transaction=session.beginTransaction();			
-			query=session.createQuery(hql);			
+			transaction=session.beginTransaction();	//开启事务		
+			query=session.createQuery(hql);	//执行hql语句		
 			query.setFirstResult(obj.getBeginIndex());			
 			query.setMaxResults(obj.getPageSize());			
 			List<T> list=query.list();			
@@ -89,6 +89,7 @@ public class PagingUtil {
 				session.close();
 			}			
 		}
+		
 	    return pageResultSet;
 	}
 }

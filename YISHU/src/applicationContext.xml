@@ -124,7 +124,8 @@
 		</bean>
 		
 		<bean id="productService" class="com.gcu.yishu.product.service.impl.ProductServiceImpl">
-	      <property name="productDao" ref="productDao"/>
+	        <property name="productDao" ref="productDao"/>
+<!-- 	        <property name="PagingUtil" ref="PagingUtil"/> -->
 		</bean>
 		
 	<!-- 配置DaoImpl bean-->
@@ -141,7 +142,7 @@
 	
 	<!-- 配置util bean-->
 		<bean id="sessionUtil" class="com.gcu.yishu.util.session.SessionUtilImpl"/>
-	
+<!-- 	    <bean id="PagingUtil" class="com.gcu.yishu.pagination.PagingUtil"/> -->
 	<!-- 配置关联点  -->
 	
 </beans>
