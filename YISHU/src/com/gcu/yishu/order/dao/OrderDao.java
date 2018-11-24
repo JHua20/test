@@ -3,13 +3,20 @@ package com.gcu.yishu.order.dao;
 import java.util.List;
 
 import com.gcu.yishu.order.pojos.Order;
+import com.gcu.yishu.order.pojos.OrderItem;
 import com.gcu.yishu.user.pojos.User;
 
 public interface OrderDao {
 	
-	/*Í¨¹ıÓÃ»§ÃûÌí¼ÓÓÃ»§¶©µ¥*/
+	/*Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	public void addOrderList(Order order);
-	/*Í¨¹ıÓÃ»§Ãû²éÕÒ¶ÔÓ¦¶©µ¥*/
+	/*Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½*/
 	List<Order> findOrderList(User user);
+	
+	public void addOrderItem(OrderItem orderItem);//æ·»åŠ è®¢å•åˆ°è´­ç‰©è½¦è°ƒç”¨æ–¹æ³•
+	
+	public List<OrderItem> findOrderItem(Order order);
+	
+	Order findNullOrder(User user);
 
 }

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/JSP/listUI.jsp=UTF-8
 encoding//src/com/gcu/yishu/pagination/PagingUtil.java=UTF-8
 encoding//src/com/gcu/yishu/product/action/ProductAction.java=UTF-8
 encoding//src/com/gcu/yishu/product/dao/BaseDao.java=UTF-8

@@ -20,8 +20,12 @@
     	<property name="Isitarrive" column="IS_IT_ARRIVE" type="integer" not-null="false"/>
     	<!-- 商品购买数量-->
     	<property name="Pro_sum" column="PRO_SUM" type="integer" not-null="false"/>
-    	<!-- 单项关联N-1 -->
+    	<!-- 与用户关联N-1 -->
     	<many-to-one name="user" column="USER_ID" class="com.gcu.yishu.user.pojos.User"/>
-  		<many-to-one name="product" column="ORDER_HAVE_PRO" class="com.gcu.yishu.product.pojos.Product"/>
+    	<!-- 与订单项关联1-N -->
+    	<set name="orderItems" table="T_ORDERITEM" cascade="all" lazy="false">
+    		<key column="ORDERITEMS"/>
+    		<one-to-many class="com.gcu.yishu.order.pojos.OrderItem"/>
+    	</set>
     </class>
 </hibernate-mapping>

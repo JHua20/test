@@ -2,11 +2,9 @@ package com.gcu.yishu.user.dao;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
-//import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.gcu.yishu.user.pojos.User;
@@ -30,8 +28,9 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao{
 	public List<User> findUserList(String sno) {
 		// TODO Auto-generated method stub
 		session=this.getHibernateTemplate().getSessionFactory().openSession();
-		Query query = (Query) session.createQuery("from User where SNO=sno");
-		List<User> users=query.getResultList();
+		Query<User> query = (Query<User>) session.createQuery("from User where SNO=?");
+		query.setParameter(0, sno);
+		List<User> users = query.list();
 		session.close();
 		return users;
 	}

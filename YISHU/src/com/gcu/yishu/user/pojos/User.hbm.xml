@@ -17,9 +17,9 @@
 		<!-- 密码 -->
 		<property name="Password" column="PASSWORD" type="string" not-null="true"/>
 		<!-- 年级 -->
-		<property name="Grade" column="GRADE" type="string" not-null="true"/>
+		<property name="Grade" column="GRADE" type="string" not-null="false"/>
 		<!-- 专业 -->
-		<property name="Major" column="MAJOR" type="string" not-null="true"/>
+		<property name="Major" column="MAJOR" type="string" not-null="false"/>
 		<!-- 手机号码 -->
 		<property name="MobilePhone" column="MOBILEPHONE" type="string" not-null="true"/>
 		<!-- 完成订单数 -->

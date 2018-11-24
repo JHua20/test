@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.gcu.yishu.order.pojos.Order;
+import com.gcu.yishu.order.pojos.OrderItem;
 import com.gcu.yishu.user.pojos.User;
 
 public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
@@ -24,15 +25,51 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 		session.close();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findOrderList(User user) {
 		System.out.println("findItemList Dao Test");
 		session=this.getHibernateTemplate().getSessionFactory().openSession();
-		Query query = (Query) session.createQuery("from T_ORDER where User_ID ="+user.getID());
-		List<Order> items=query.getResultList();
+		Query<Order> query = (Query<Order>) session.createQuery("from Order o where o.user = ?");
+		query.setParameter(0, user);
+		List<Order> orders=query.list();
 		session.close();
-		return items;
+		return orders;
 	}
 
+	@Override
+	public void addOrderItem(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+		System.out.println("----------->addOrderItem Dao Test");
+		session=this.getHibernateTemplate().getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(orderItem);
+		transaction.commit();
+		session.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Order findNullOrder(User user) {
+		// TODO Auto-generated method stub
+		session=this.getHibernateTemplate().getSessionFactory().openSession();
+		Query<Order> query = (Query<Order>) session.createQuery("from Order o where o.user = ? and o.IsitPay = 0");
+		query.setParameter(0, user);
+		Order order=(Order) query.list().get(0);
+		session.close();
+		return order;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderItem> findOrderItem(Order order) {
+		// TODO Auto-generated method stub
+		session=this.getHibernateTemplate().getSessionFactory().openSession();
+		Query<OrderItem> query = (Query<OrderItem>) session.createQuery("from OrderItem where orderID=?");
+		query.setParameter(0,order);
+		List<OrderItem> orderItems = query.list();
+		session.close();
+		return orderItems;
+	}
+	
 }

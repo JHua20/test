@@ -19,6 +19,14 @@
 <script src="<%=basePath%>JSP/lib/jquery-3.3.1.js"></script>
 <script src="<%=basePath%>JSP/lib/bootstrap/js/bootstrap.js"></script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#linkToCart").click(function(){
+			var buyNum = $("#sum").val();
+			$("#linkToCart").attr("href","Cart_addToCart.action?count="+buyNum);
+		});
+	});
+</script>
 </head>
 <body style="height:1000px;">
 
@@ -129,13 +137,13 @@
                           <input type="text" class="btn-sm border border-dark border-left-0 border-right-0" style="border-radius:0;width:2em;" value=1 id="sum"/>
                           <a class="btn btn-light btn-sm border border-dark" id="add">&#43;</a>
                         </div>
-                        <span style="margin-left:2em;color:red;">(仅剩<span id="account">3</span>件)</span>
+                        <span style="margin-left:2em;color:red;">(仅剩<span id="account">${product.pro_num}</span>件)</span>
                     </td>
                 </tr>
                 <tr>
                     <td><a class="btn btn-md border border-danger shop_now" href="#">现在购买</a></td>
                     <td>
-                        <a class="btn btn-md shop_car" href="Product_shopCar"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;加入购物车</a>
+                        <a id="linkToCart" class="btn btn-md shop_car" href=""><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;加入购物车</a>
                         <a class="btn btn-lg border border-danger shop_now" href="#" style="opacity:0.8;">
                             <span class="glyphicon glyphicon-star-empty" style="color:red;"></span>
                         </a>
@@ -167,60 +175,116 @@
   </div>
 <!--  相关推荐-->
 
-    <div class="container" style="height:25%;">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="text-center" style="height:2rem;line-height:2rem;border:1px solid red;color:red;font-size:1rem;background:#ffeded;border-radius:1rem 3rem 3rem 1rem;">相关推荐</div>
+    <div class="tuijian_con">
+            <div style="height:20%;">
+                <div style="width:25%;">
+                    <div class="text-center tuijian_title">相关推荐</div>
+                </div>
+                <img src="<%=basePath%>JSP/lib/bootstrap/img/bord.jpg"  class="tuijian_border"/>
             </div>
-            
-            <img src="<%=basePath%>JSP/lib/bootstrap/img/bord.jpg"  style="width:100%;height:20px;"/>
-        </div>
-        
-<!--
-            <div class="col-md-1" style="border:1px solid black;height:100%;"></div> 
-            <div class="col-md-9" style="border:1px solid red;height:100%;"></div>
-            <div class="col-md-1" style="border:1px solid black;height:100%;float:right;"></div> 
--->
-           <div class="row" style="height:75%;overflow:hidden;">
-                
-                   <div class="col-md-3 card" style="height:100%;">
-                        <a href="#">
-                            <img class="card-img-top" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..." style="height:80%;width:98%;"/>
-                        </a>
-                        <h5 class="card-title text-center" style="height:20%;width:98%;">高等数学</h5>
-                   </div>
-               
-                   <div class="col-md-3 card" style="height:100%;">
-                        <a href="#">
-                           <img class="card-img-top" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..." style="height:80%;width:98%;"/>
-                        </a>
-                        <h5 class="card-title text-center" style="height:20%;width:98%;">高等数学</h5>
-                   </div>
 
-                   <div class="col-md-3 card" style="height:100%;">
-                      <a href="#">
-                           <img class="card-img-top" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..." style="height:80%;width:98%;"/>
-                        </a>
-                        <h5 class="card-title text-center" style="height:20%;width:98%;">高等数学</h5>
-                   </div>
+            <div id="tuijian">
+               <!--左箭头-->
+                <div class="chevron-hide" id="left_c">
+                    <div class="fill"></div>
+                    <div id="left">
+                        <span class="glyphicon glyphicon-chevron-left icon"></span>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+                <div id="parent">
+                    <div id="pro_c">
+                        
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/3.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                        <div class="card tuijian_pro_img_con" id="pro">
+                           <a href="#"><img class="card-img-top img-thumbnail tuijian_pro_img" src="<%=basePath%>JSP/lib/bootstrap/img/4.jpg" alt="图片加载中..."/></a>
+                           <h5 class="card-title text-center pro_name"><a href="#">高等数学</a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="chevron-hide" id="right_c">
+                    <div class="fill"></div>
+                    <div id="right">
+                        <span class="glyphicon glyphicon-chevron-right icon" ></span>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+  
+     </div>
+        <script>
+               function over(obj){
+                   obj.removeClass("chevron-hide");
+                   obj.addClass("chevron-show");
+                   
+               }
+               function out(obj){
+                    obj.removeClass("chevron-show");
+                    obj.addClass("chevron-hide");
+               }
+               $(function(){
+                    $("#right_c").mouseover(function(){
+                        var _this = $(this);
+                        over(_this);
+                        _this.click(
+                            function(){
+                                temp = $("#pro_c").scrollLeft()+20;
+                                if(temp<Math.floor($("#pro_c").get(0).scrollWidth-$("#parent").innerWidth())){
+                                    $("#pro_c").scrollLeft(temp);
+                                }else{
+                                    $("#pro_c").scrollLeft(Math.floor($("#pro_c").get(0).scrollWidth-$("#parent").innerWidth()));
+                                }
+                            }
+                        );
+                    });  
+                   $("#right_c").mouseout(function(){
+                        out($(this));
+                   });
+               });
+               $(function(){
+                        $("#left_c").mouseover(function(){
+                            var _this = $(this);
+                            over(_this);
+                            _this.click(
+                                function(){
+                                    temp = $("#pro_c").scrollLeft()-20;
+                                    if(temp>0){
+                                        $("#pro_c").scrollLeft(temp);
+                                    }else{
+                                        $("#pro_c").scrollLeft(0);
+                                    }
+                                }
+                            );
+                        });  
+                       $("#left_c").mouseout(function(){
+                            out($(this));
+                       });
+                   });
 
-                   <div class="col-md-3 card" style="height:100%;">
-                       <a href="#">
-                           <img class="card-img-top" src="<%=basePath%>JSP/lib/bootstrap/img/2.jpg" alt="图片加载中..." style="height:80%;width:98%;"/>
-                        </a>
-                        <h5 class="card-title text-center" style="height:20%;width:98%;">高等数学</h5>
-                   </div>
-                   
-                  
-                   
-         
-           </div>
-            <br/>
+           </script>
+     <br/>
 	<!-- 导入尾部 -->
     <jsp:include page="/JSP/foot.jsp"></jsp:include>
-    
-          
-    </div>
+ 
 </div>
 </body>
 </html>

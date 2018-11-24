@@ -123,10 +123,11 @@
 	        </c:forEach>             
         </div>
       </div>
+      <br/>
+      <!-- 导入尾部 -->
+    <jsp:include page="/JSP/foot.jsp"></jsp:include>
     </div>
     <br/>
-	<!-- 导入尾部 -->
-    <jsp:include page="/JSP/foot.jsp"></jsp:include>
 </div>
 
 </body>

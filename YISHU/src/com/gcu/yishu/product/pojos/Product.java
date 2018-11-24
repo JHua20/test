@@ -2,7 +2,10 @@ package com.gcu.yishu.product.pojos;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.gcu.yishu.order.pojos.OrderItem;
 import com.gcu.yishu.user.pojos.User;
 //import java.util.Date;
 /**
@@ -23,14 +26,20 @@ public class Product implements Serializable {
 	private Integer Pro_id;//商品id---主键
 	private String Pro_name;//商品名字
 	private String Pro_press;//出版社
-	private String Pro_price;//价格
+	private double Pro_price;//价格
 	private String Pro_author;//作者
+	private Integer Pro_num;//商品数量
 //	private Date pro_PubishTime;//娴溠冩惂閸欐垵绔烽弮鍫曟？
 	private String Pro_pubishTime;
 	private Integer Collected_count;
 	private Product_Style product_Style;//鍥剧墖鏍峰紡绫�
+	
+	private String Pro_isbn;
+	private String Pro_version;
 
 	private User user;//卖家
+	
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>();//订单项集合
 	
 	private File pro_pic;//图片文件	
 	private String pic_path;//图片路径
@@ -67,11 +76,11 @@ public class Product implements Serializable {
 		Pro_press = pro_press;
 	}
 
-	public String getPro_price() {
+	public double getPro_price() {
 		return Pro_price;
 	}
 
-	public void setPro_price(String pro_price) {
+	public void setPro_price(double pro_price) {
 		Pro_price = pro_price;
 	}
 
@@ -81,6 +90,14 @@ public class Product implements Serializable {
 
 	public void setPro_author(String pro_author) {
 		Pro_author = pro_author;
+	}
+
+	public Integer getPro_num() {
+		return Pro_num;
+	}
+
+	public void setPro_num(Integer pro_num) {
+		Pro_num = pro_num;
 	}
 
 	public Integer getCollected_count() {
@@ -116,6 +133,22 @@ public class Product implements Serializable {
 		this.product_Style = product_Style;
 	}
 
+	public String getPro_isbn() {
+		return Pro_isbn;
+	}
+
+	public void setPro_isbn(String pro_isbn) {
+		Pro_isbn = pro_isbn;
+	}
+
+	public String getPro_version() {
+		return Pro_version;
+	}
+
+	public void setPro_version(String pro_version) {
+		Pro_version = pro_version;
+	}
+
 	public String getPic_path() {
 		return pic_path;
 	}
@@ -138,6 +171,14 @@ public class Product implements Serializable {
 
 	public void setMajor(String major) {
 		this.major = major;
+	}
+
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	

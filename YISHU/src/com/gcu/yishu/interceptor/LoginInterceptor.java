@@ -1,11 +1,7 @@
 package com.gcu.yishu.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
 
-import com.gcu.yishu.user.pojos.User;
-import com.gcu.yishu.util.session.SessionUtil;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 /*
@@ -14,12 +10,17 @@ import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 //拦截器
 public class LoginInterceptor extends MethodFilterInterceptor{
 
-	private SessionUtil sessionUtil;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception {		
 	
-		HttpServletRequest request = ServletActionContext.getRequest();
-		Object obj = request.getSession().getAttribute("UserList");
+		
+		Object obj = ServletActionContext.getRequest().getSession().getAttribute("User");
         if(obj != null){
         	//处于登录状态
         	System.out.println("登录了");

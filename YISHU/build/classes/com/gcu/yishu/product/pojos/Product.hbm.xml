@@ -19,8 +19,12 @@
         <property name="Pro_author" type="java.lang.String">
             <column name="PRO_AUTHOR" length="255"/>
         </property>
+        <!-- 商品数量 -->
+        <property name="Pro_num" type="integer">
+        	<column name="PRO_NUM" not-null="true"></column>
+        </property>
         <!-- 售价 -->
-        <property name="Pro_price" type="java.lang.String">
+        <property name="Pro_price" type="double">
             <column name="PRO_PRICE" length="255"/>
         </property>
         <!-- 出版社 -->
@@ -29,8 +33,16 @@
         </property>
         <!-- 上架时间 -->
         <property name="Pro_pubishTime" type="java.lang.String">
-            <column name="PRO_PUBLISHTIME" not-null="true" length="10"></column>
+            <column name="PRO_PUBLISHTIME" not-null="true" length="20"></column>
         </property>
+         <!-- 商品isbn -->
+        <property name="Pro_isbn" type="java.lang.String">
+            <column name="PRO_ISBN" ></column>
+        </property>  
+        <!-- 商品版本 -->
+        <property name="Pro_version" type="java.lang.String">
+            <column name="PRO_VERSION" ></column>
+        </property>          
         <!-- 封面路径 -->
         <property name="pic_path" type="java.lang.String">
             <column name="PIC_PATH" not-null="true"></column>
@@ -45,5 +57,10 @@
          </many-to-one>  
         <!-- 一对一         与图样|介绍-->
         <one-to-one name="product_Style" class="Product_Style" property-ref="product"/>
+        <!-- 与订单项OrderItem 1-N -->
+        <set name="orderItems" table="T_ORDERITEM" cascade="all" inverse="true" lazy="false">
+        	<key column="PRODUCT_ID"/>
+        	<one-to-many class="com.gcu.yishu.order.pojos.OrderItem"/>
+        </set>
     </class>
 </hibernate-mapping>

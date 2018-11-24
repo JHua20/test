@@ -70,6 +70,7 @@
 	        <list>
 	          <value>/com/gcu/yishu/user/pojos/User.hbm.xml</value>
 	          <value>/com/gcu/yishu/order/pojos/Order.hbm.xml</value>
+	          <value>/com/gcu/yishu/order/pojos/OrderItem.hbm.xml</value>
 	      
 	          <value>com/gcu/yishu/product/pojos/Product_Style.hbm.xml</value>
 	          <value>com/gcu/yishu/product/pojos/Product.hbm.xml</value>
@@ -102,17 +103,17 @@
 		<bean id="userAction" class="com.gcu.yishu.user.action.UserActionImpl" scope="prototype">
 			<property name="userService" ref="userService"/>
 			<property name="orderAction" ref="orderAction"/>
-			<property name="sessionUtil" ref="sessionUtil"/>
 		</bean>
 		<bean id="orderAction" class="com.gcu.yishu.order.action.OrderActionImpl" scope="prototype">
 			<property name="orderService" ref="orderService"/>
-			<property name="sessionUtil" ref="sessionUtil"/>
 		</bean>
 		
-		<bean id = "productAction" class ="com.gcu.yishu.product.action.ProductAction" scope="prototype">
+		<bean id="productAction" class ="com.gcu.yishu.product.action.ProductAction" scope="prototype">
 	      <property name="productService" ref="productService"/>
-	      <property name="sessionUtil" ref="sessionUtil"/>
 	      <property name="orderAction" ref="orderAction"/>
+		</bean>
+		<bean id="cartAction" class="com.gcu.yishu.cart.action.CartActionImpl" scope="prototype">
+			<property name="orderAction" ref="orderAction"/>
 		</bean>
 		
 	<!-- 配置ServiceImpl bean-->
@@ -140,9 +141,5 @@
 	     <property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
 	
-	<!-- 配置util bean-->
-		<bean id="sessionUtil" class="com.gcu.yishu.util.session.SessionUtilImpl"/>
-<!-- 	    <bean id="PagingUtil" class="com.gcu.yishu.pagination.PagingUtil"/> -->
-	<!-- 配置关联点  -->
 	
 </beans>

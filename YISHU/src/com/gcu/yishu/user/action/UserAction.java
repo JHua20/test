@@ -12,6 +12,8 @@ public interface UserAction {
 	public String addOrder();
 	public String findOrder();
 	
+	public String loginOut();
+	
 	public String ToRegister();
 	public String ToLogin();
 	public String to_main();

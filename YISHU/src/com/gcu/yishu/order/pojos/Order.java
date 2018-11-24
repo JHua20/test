@@ -1,8 +1,9 @@
 package com.gcu.yishu.order.pojos;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.gcu.yishu.product.pojos.Product;
 import com.gcu.yishu.user.pojos.User;
 
 public class Order {
@@ -18,12 +19,12 @@ public class Order {
 
 	private User user;//
 
-	private Product product;//
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>();//订单项集合
 	
 	public Order(){super();};
 	
 	public void setOrder(Date createTime, Integer isitPay, Integer isitarrive, 
-			Integer isitOnline, Integer pro_sum, User user,Product product)
+			Integer isitOnline, Integer pro_sum, User user)
 	{
 		this.CreateTime = createTime;
 		this.IsitPay = isitPay;
@@ -31,7 +32,6 @@ public class Order {
 		this.IsitOnline = isitOnline;
 		this.Pro_sum = pro_sum;
 		this.user = user;
-		this.product = product;
 	}
 
 	public Integer getOrder_Id() {
@@ -90,11 +90,11 @@ public class Order {
 		this.user = user;
 	}
 	
-	public Product getProduct() {
-		return product;
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 }

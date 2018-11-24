@@ -2,23 +2,18 @@ package com.gcu.yishu.user.action;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.gcu.yishu.order.action.OrderAction;
 import com.gcu.yishu.user.pojos.User;
 import com.gcu.yishu.user.service.UserService;
-import com.gcu.yishu.util.session.SessionUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class UserActionImpl extends ActionSupport implements SessionAware, ModelDriven<User>, UserAction{
+public class UserActionImpl extends ActionSupport implements ModelDriven<User>, UserAction{
 
 	/**
 	 * 
@@ -28,14 +23,6 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 	private UserService userService;
 	private OrderAction orderAction;
 	private User user = new User();
-	private SessionUtil sessionUtil;
-	private Map<String, Object> session;
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		// TODO Auto-generated method stub
-		this.session=session;
-	}
 
 	public void setUserService(UserService userService)
 	{
@@ -44,10 +31,6 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 	public void setOrderAction(OrderAction orderAction)
 	{
 		this.orderAction=orderAction;
-	}
-	public void setSessionUtil(SessionUtil sessionUtil)
-	{
-		this.sessionUtil=sessionUtil;
 	}
 
 	@Override
@@ -69,6 +52,9 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 				}
 				System.out.println("userGetPath Test:"+user.getHeadImgPath());
 				userService.User_add(user);
+				ServletActionContext.getRequest().getSession().setAttribute("User1",user);
+				orderAction.addNULLOrder();//添加购物车用的空订单
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,24 +64,18 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 
 	@Override
 	public String login() {
-		//得到request对象
-/*10.7*/HttpServletRequest request = ServletActionContext.getRequest();
-		
 		System.out.println("User_Login test_01"+user.toString());
 		List<User> users=userService.User_login(user,user.getSNO());
+
+		System.out.println("User Login Test-------->::"+users);
+
 		if(users.equals(null)) return "error";
-		for(User isuser:users)
+		if(users.get(0).getSNO().equals(user.getSNO())&&users.get(0).getPassword().equals(user.getPassword()))
 		{
-			if(isuser.getSNO().equals(user.getSNO())&&isuser.getPassword().equals(user.getPassword()))
-			{
-/*10.7*/		request.getSession().setAttribute("UserList", isuser);
-	     
-				session.put("UserList", isuser);
-				System.out.println("Session Put Test: "+session.get("UserList").toString());
-				sessionUtil.setSession(session);
-/*10.8*/		return "toHome";
-			}
+			ServletActionContext.getRequest().getSession().setAttribute("User", users.get(0));//将User放入Session中
+			return "toHome";/*10.8*/
 		}
+
 		return "error";
 	}
 
@@ -121,7 +101,15 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 		orderAction.findOrderList();
 		return null;
 	}
-	
+
+
+	@Override
+	public String loginOut() {
+		// TODO Auto-generated method stub
+		ServletActionContext.getRequest().getSession().invalidate();
+		return "home";
+	}
+
 	@Override
 	public User getModel() {
 		// TODO Auto-generated method stub
@@ -145,7 +133,7 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 		// TODO Auto-generated method stub
 		return "main";
 	}
-    //到个人主页
+	//到个人主页
 	@Override
 	public String listUI() {
 		// TODO Auto-generated method stub
@@ -155,6 +143,7 @@ public class UserActionImpl extends ActionSupport implements SessionAware, Model
 	@Override
 	public String homePage() {
 		// TODO Auto-generated method stub
-/*10.8*/return "home";
+		/*10.8*/return "home";
 	}
 }
+

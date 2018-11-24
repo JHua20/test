@@ -7,7 +7,7 @@
     
 %>  
 <!-- 对应session的user -->
-<c:set var="user" value="${UserList}"></c:set>
+<c:set var="user" value="${User}"></c:set>
 <!-- 头部登录栏  -->
     <ul class="nav nav-pills bg-danger justify-content-end nav_height" role="tablist">
     <c:if test="${empty user}">
@@ -41,7 +41,7 @@
                     </i>
                </li>
                <li class="nav-item" style="margin-right:3%;">
-                   <a href="#" class="nav-link" style='background:white;height:70%;line-height:70%;margin-top:8%;padding-top:10%;color:#505252;font-size:0.8rem;' >
+                   <a href="${pageContext.request.contextPath}/User_loginOut.action" class="nav-link" style='background:white;height:70%;line-height:70%;margin-top:8%;padding-top:10%;color:#505252;font-size:0.8rem;' >
 	                   <span class="glyphicon glyphicon-off" style="color:red"></span>
 	                   &nbsp;退出
                    </a>
@@ -64,7 +64,7 @@
                     <a class="nav-link" style="font-weight:bolder;color:#f15b28;" href="${pageContext.request.contextPath}/Product_allProduct.action?CurrentPage=1"><span class="glyphicon glyphicon-book"></span>&nbsp;所有商品<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item text-center col-md-3">
-                    <a class="nav-link" style="font-weight:bolder;color:#f15b28;" href="${pageContext.request.contextPath}/Product_listUI.action"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
+                    <a class="nav-link" style="font-weight:bolder;color:#f15b28;" href="${pageContext.request.contextPath}/Product_listUI.action?shopkeeperId=${user.ID}"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
                 </li>
             </ul>
         </div>
@@ -206,19 +206,27 @@
                 </div>
                 <div class="modal-body" >
                     <div class="container-flush">
-                        <form role="form">
+                        <form role="form" action="User_add.action" method="post">
+                        	
+                        	<div class="form-group has-feedback input-group input-group-sm col-md-8">
+                                <span class="input-group-text rounded-left clear_right-radius">
+                                    <span class=" glyphicon glyphicon-user form-control-feedback"></span>
+                                </span>  
+                                <input name="SNO" type="text" class="form-control" placeholder="输入学号" required> 
+                            </div>
+                        	
                             <div class="form-group has-feedback input-group input-group-sm col-md-8">
                                 <span class="input-group-text rounded-left clear_right-radius">
                                     <span class=" glyphicon glyphicon-user form-control-feedback"></span>
                                 </span>  
-                                <input type="text" class="form-control" placeholder="输入用户名..." required> 
+                                <input name="UserName" type="text" class="form-control" placeholder="输入用户名..." required> 
                             </div>
 
                             <div class="form-group has-feedback input-group input-group-sm col-md-8">
                                 <span class="input-group-text rounded-left clear_right-radius">
                                     <span class=" glyphicon glyphicon-lock form-control-feedback"></span>
                                 </span>
-                                <input type="password" class="form-control" placeholder="输入密码..." required> 
+                                <input name="Password" type="password" class="form-control" placeholder="输入密码..." required> 
                             </div>
 
                            <div class="form-group has-feedback input-group input-group-sm col-md-8">
@@ -232,12 +240,13 @@
                                 <span class="input-group-text rounded-left clear_right-radius">
                                     <span class=" glyphicon glyphicon-phone form-control-feedback"></span>
                                 </span>
-                                <input type="text" class="form-control" placeholder="请输入手机号码..." required> 
+                                <input name="MobilePhone" type="text" class="form-control" placeholder="请输入手机号码..." required> 
                             </div>
 
                            
                             <div class="text-right col-md-8">
-                                <a class="btn btn-danger btn-sm col-md-12" href="#">注册</a>
+<!--                                 <a class="btn btn-danger btn-sm col-md-12" href="#">注册</a> -->
+                                <input class="btn btn-danger btn-sm col-md-12" type="submit" value="注册" />
                             </div>
                         </form>
                      </div>

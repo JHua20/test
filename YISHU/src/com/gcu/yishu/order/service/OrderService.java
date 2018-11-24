@@ -3,12 +3,16 @@ package com.gcu.yishu.order.service;
 import java.util.List;
 
 import com.gcu.yishu.order.pojos.Order;
+import com.gcu.yishu.order.pojos.OrderItem;
 import com.gcu.yishu.user.pojos.User;
 
 public interface OrderService {
 
-	/*Í¨¹ıÓÃ»§ÃûÌí¼ÓÓÃ»§¶©µ¥*/
+	/*Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	public String addOrderList(Order order);
-	/*Í¨¹ıÓÃ»§Ãû²éÕÒ¶ÔÓ¦¶©µ¥*/
+	/*Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½*/
 	List<Order> findOrderList(User user);
+	
+	public String addOrderItem(OrderItem orderItem);
+	Order findNullOrder(User user);
 }
